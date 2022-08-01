@@ -16,3 +16,32 @@ h2 {
   text-align: center;
   margin: 10px 0 10px 0;
 }
+
+#calender_title {
+  font-size: 30px;
+  text-align: center;
+  margin: 10 0 10px 0;
+}
+
+#calender {
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  margin: 0 20px 0 20px;
+}
+
+#left_btn {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+#right_btn {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
