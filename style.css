@@ -45,3 +45,7 @@ table {
   background-color: transparent;
   cursor: pointer;
 }
+
+.day_of_today {
+  cursor: pointer;
+}

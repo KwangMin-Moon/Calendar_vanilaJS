@@ -4,7 +4,7 @@ const $calenderTitle = document.querySelector('#calender_title');
 const $td = document.querySelectorAll('td');
 const $rightBtn = document.querySelector('#right_btn');
 const $leftBtn = document.querySelector('#left_btn');
-const days = ['SUN', 'MON', 'THE', 'WED', 'THU', 'FRI', '토'];
+const days = ['SUN', 'MON', 'THE', 'WED', 'THU', 'FRI', 'SAT'];
 const months = [
   'JAN',
   'FEB',
@@ -28,6 +28,7 @@ let startOfMonth = new Date(year, month, 1);
 let lastOfMonth = new Date(year, month + 1, 0);
 let startDay = startOfMonth.getDay();
 let lastDate = lastOfMonth.getDate();
+let todayOfMonth = month;
 
 $dayOfToday.textContent = days[day];
 $dateOfToday.textContent = date;
@@ -45,6 +46,9 @@ function makeCalendar(startDay, lastDate) {
 makeCalendar(startDay, lastDate);
 
 $rightBtn.addEventListener('click', () => {
+  console.log(todayOfMonth);
+  console.log(month);
+
   month++;
   if (month > 11) {
     month = 0;
@@ -53,12 +57,19 @@ $rightBtn.addEventListener('click', () => {
   startOfMonth = new Date(year, month, 1);
   lastOfMonth = new Date(year, month + 1, 0);
   startDay = startOfMonth.getDay();
-  console.log(startDay);
   lastDate = lastOfMonth.getDate();
-  console.log(lastDate);
+  $dayOfToday.textContent = days[startDay];
+  $dateOfToday.textContent = 1;
   makeCalendar(startDay, lastDate);
   $td[date].style.color = 'black';
   $calenderTitle.textContent = `${months[month]} ${year}`;
+  if (month === todayOfMonth) {
+    console.log(true);
+    $td[date].style.color = 'red';
+    $dayOfToday.textContent = days[day];
+    $dateOfToday.textContent = date;
+    $calenderTitle.textContent = `${months[month]} ${year}`;
+  }
 });
 
 $leftBtn.addEventListener('click', () => {
@@ -70,10 +81,16 @@ $leftBtn.addEventListener('click', () => {
   startOfMonth = new Date(year, month, 1);
   lastOfMonth = new Date(year, month + 1, 0);
   startDay = startOfMonth.getDay();
-  console.log(startDay);
   lastDate = lastOfMonth.getDate();
-  console.log(lastDate);
+  $dayOfToday.textContent = days[startDay];
+  $dateOfToday.textContent = 1;
   makeCalendar(startDay, lastDate);
   $td[date].style.color = 'black';
   $calenderTitle.textContent = `${months[month]} ${year}`;
+  if (month === todayOfMonth) {
+    $td[date].style.color = 'red';
+    $dayOfToday.textContent = days[day];
+    $dateOfToday.textContent = date;
+    $calenderTitle.textContent = `${months[month]} ${year}`;
+  }
 });
