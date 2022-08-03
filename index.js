@@ -3,6 +3,7 @@ const $dateOfToday = document.querySelector('.date_of_today');
 const $calenderTitle = document.querySelector('#calender_title');
 const $td = document.querySelectorAll('td');
 const $rightBtn = document.querySelector('#right_btn');
+const $leftBtn = document.querySelector('#left_btn');
 const days = ['SUN', 'MON', 'THE', 'WED', 'THU', 'FRI', '토'];
 const months = [
   'JAN',
@@ -48,6 +49,23 @@ $rightBtn.addEventListener('click', () => {
   if (month > 11) {
     month = 0;
     year++;
+  }
+  startOfMonth = new Date(year, month, 1);
+  lastOfMonth = new Date(year, month + 1, 0);
+  startDay = startOfMonth.getDay();
+  console.log(startDay);
+  lastDate = lastOfMonth.getDate();
+  console.log(lastDate);
+  makeCalendar(startDay, lastDate);
+  $td[date].style.color = 'black';
+  $calenderTitle.textContent = `${months[month]} ${year}`;
+});
+
+$leftBtn.addEventListener('click', () => {
+  month--;
+  if (month < 0) {
+    month = 11;
+    year--;
   }
   startOfMonth = new Date(year, month, 1);
   lastOfMonth = new Date(year, month + 1, 0);
