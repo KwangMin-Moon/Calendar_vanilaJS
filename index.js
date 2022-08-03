@@ -4,6 +4,7 @@ const $calenderTitle = document.querySelector('#calender_title');
 const $td = document.querySelectorAll('td');
 const $rightBtn = document.querySelector('#right_btn');
 const $leftBtn = document.querySelector('#left_btn');
+const $table = document.querySelector('table');
 const days = ['SUN', 'MON', 'THE', 'WED', 'THU', 'FRI', 'SAT'];
 const months = [
   'JAN',
@@ -46,9 +47,6 @@ function makeCalendar(startDay, lastDate) {
 makeCalendar(startDay, lastDate);
 
 $rightBtn.addEventListener('click', () => {
-  console.log(todayOfMonth);
-  console.log(month);
-
   month++;
   if (month > 11) {
     month = 0;
@@ -64,7 +62,6 @@ $rightBtn.addEventListener('click', () => {
   $td[date].style.color = 'black';
   $calenderTitle.textContent = `${months[month]} ${year}`;
   if (month === todayOfMonth) {
-    console.log(true);
     $td[date].style.color = 'red';
     $dayOfToday.textContent = days[day];
     $dateOfToday.textContent = date;
@@ -93,4 +90,11 @@ $leftBtn.addEventListener('click', () => {
     $dateOfToday.textContent = date;
     $calenderTitle.textContent = `${months[month]} ${year}`;
   }
+});
+
+$table.addEventListener('click', (e) => {
+  $dateOfToday.textContent = e.target.textContent;
+  let newDate = new Date(year, month, $dateOfToday.textContent);
+  let newDay = newDate.getDay();
+  $dayOfToday.textContent = days[newDay];
 });
