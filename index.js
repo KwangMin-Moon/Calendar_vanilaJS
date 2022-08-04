@@ -5,6 +5,7 @@ const $td = document.querySelectorAll('td');
 const $rightBtn = document.querySelector('#right_btn');
 const $leftBtn = document.querySelector('#left_btn');
 const $table = document.querySelector('table');
+
 const days = ['SUN', 'MON', 'THE', 'WED', 'THU', 'FRI', 'SAT'];
 const months = [
   'JAN',
@@ -20,6 +21,7 @@ const months = [
   'NOV',
   'DEC',
 ];
+
 const now = new Date();
 const day = now.getDay();
 const date = now.getDate();
@@ -29,6 +31,7 @@ let startOfMonth = new Date(year, month, 1);
 let lastOfMonth = new Date(year, month + 1, 0);
 let startDay = startOfMonth.getDay();
 let lastDate = lastOfMonth.getDate();
+
 let todayOfMonth = month;
 
 $dayOfToday.textContent = days[day];
@@ -44,6 +47,25 @@ function makeCalendar(startDay, lastDate) {
   }
   $td[date].style.color = 'red';
 }
+
+function changeCalendar() {
+  startOfMonth = new Date(year, month, 1);
+  lastOfMonth = new Date(year, month + 1, 0);
+  startDay = startOfMonth.getDay();
+  lastDate = lastOfMonth.getDate();
+  $dayOfToday.textContent = days[startDay];
+  $dateOfToday.textContent = 1;
+  makeCalendar(startDay, lastDate);
+  $td[date].style.color = 'black';
+  $calenderTitle.textContent = `${months[month]} ${year}`;
+  if (month === todayOfMonth) {
+    $td[date].style.color = 'red';
+    $dayOfToday.textContent = days[day];
+    $dateOfToday.textContent = date;
+    $calenderTitle.textContent = `${months[month]} ${year}`;
+  }
+}
+
 makeCalendar(startDay, lastDate);
 
 $rightBtn.addEventListener('click', () => {
@@ -52,21 +74,7 @@ $rightBtn.addEventListener('click', () => {
     month = 0;
     year++;
   }
-  startOfMonth = new Date(year, month, 1);
-  lastOfMonth = new Date(year, month + 1, 0);
-  startDay = startOfMonth.getDay();
-  lastDate = lastOfMonth.getDate();
-  $dayOfToday.textContent = days[startDay];
-  $dateOfToday.textContent = 1;
-  makeCalendar(startDay, lastDate);
-  $td[date].style.color = 'black';
-  $calenderTitle.textContent = `${months[month]} ${year}`;
-  if (month === todayOfMonth) {
-    $td[date].style.color = 'red';
-    $dayOfToday.textContent = days[day];
-    $dateOfToday.textContent = date;
-    $calenderTitle.textContent = `${months[month]} ${year}`;
-  }
+  changeCalendar();
 });
 
 $leftBtn.addEventListener('click', () => {
@@ -75,21 +83,7 @@ $leftBtn.addEventListener('click', () => {
     month = 11;
     year--;
   }
-  startOfMonth = new Date(year, month, 1);
-  lastOfMonth = new Date(year, month + 1, 0);
-  startDay = startOfMonth.getDay();
-  lastDate = lastOfMonth.getDate();
-  $dayOfToday.textContent = days[startDay];
-  $dateOfToday.textContent = 1;
-  makeCalendar(startDay, lastDate);
-  $td[date].style.color = 'black';
-  $calenderTitle.textContent = `${months[month]} ${year}`;
-  if (month === todayOfMonth) {
-    $td[date].style.color = 'red';
-    $dayOfToday.textContent = days[day];
-    $dateOfToday.textContent = date;
-    $calenderTitle.textContent = `${months[month]} ${year}`;
-  }
+  changeCalendar();
 });
 
 $table.addEventListener('click', (e) => {
